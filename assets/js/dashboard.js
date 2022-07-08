@@ -1,0 +1,74 @@
+const Orders = [
+    {
+        productName: 'Drone DJI',
+        productNumber: '14515',
+        paymentStatus: 'Due', 
+        shipping: 'Pending'
+    },
+    {
+        productName: 'Monitor AOC',
+        productNumber: '12154',
+        paymentStatus: 'Refunded', 
+        shipping: 'Declined'
+    },
+    {
+        productName: 'Fortrek Black Hawk keyboard',
+        productNumber: '24815',
+        paymentStatus: 'Due', 
+        shipping: 'Pending'
+    },
+    {
+        productName: 'NVME SSD Kingston 240Gb',
+        productNumber: '487856',
+        paymentStatus: 'Paid', 
+        shipping: 'Delivered'
+    },
+    {
+        productName: 'Xiaomi Redmi Note 10',
+        productNumber: '53578',
+        paymentStatus: 'Paid', 
+        shipping: 'Delivered'
+    }
+]
+
+const sideMenu = document.querySelector("aside");
+const menuBtn = document.querySelector("#menu-btn");
+const closeBtn = document.querySelector("#close-btn");
+const themeToggler = document.querySelector(".theme-toggler");
+
+
+// show sidebar
+menuBtn.addEventListener('click', () =>{
+    sideMenu.style.display = 'block';
+})
+
+// hide sidebar
+closeBtn.addEventListener('click', () => {
+    sideMenu.style.display = 'none';
+})
+
+// toggle theme
+themeToggler.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme-variables');
+
+    themeToggler.querySelector('span:nth-child(1)').classList.toggle('active');
+    themeToggler.querySelector('span:nth-child(2)').classList.toggle('active');
+})
+
+//Fill orders in table ( see the db on first line)
+Orders.forEach(order => {
+    const tableRow = document.createElement('tr');
+    const trContent = `
+                        <td>${order.productName}</td>
+                        <td>${order.productNumber}</td>
+                        <td>${order.paymentStatus}</td>
+                        <td class="${order.shipping === 'Declined' ? 'danger' : order.shipping === 'Pending' ? 'warning' : 'success'}">${order.shipping}</td>
+                        <td class="primary">Details</td>
+                        ` ;
+    tableRow.innerHTML = trContent;
+    console.log(tableRow)
+    document.querySelector('table tbody').appendChild(tableRow);
+})
+
+
+
